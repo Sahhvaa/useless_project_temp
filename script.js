@@ -1,21 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('mazeCanvas');
-    // If canvas doesn't exist, stop right away.
     if (!canvas) {
         console.error("Error: Canvas element not found!");
         return;
     }
     const ctx = canvas.getContext('2d');
     const levelCounter = document.getElementById('level-counter');
-
-    // --- GAME CONFIGURATION ---
     canvas.width = 400;
     canvas.height = 400;
     const cellSize = 20;
     const cols = canvas.width / cellSize;
     const rows = canvas.height / cellSize;
 
-    // --- GAME STATE ---
     let grid; 
     let player;
     let goal;
@@ -94,17 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillRect(player.x * cellSize + cellSize / 4, player.y * cellSize + cellSize / 4, cellSize / 2, cellSize / 2);
     }
 
-    // This is the most reliable way to listen for key presses.
     window.addEventListener('keydown', (e) => {
-        // *** DEBUGGING STEP ***: This will log to your browser's console.
         console.log('Key pressed:', e.key); 
-
-        // We only care about arrow keys.
         if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
             return;
         }
-
-        // Stop the browser from scrolling with the arrow keys.
         e.preventDefault();
 
         const currentCell = grid[player.y * cols + player.x];
@@ -138,3 +128,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupNewLevel();
 });
+
